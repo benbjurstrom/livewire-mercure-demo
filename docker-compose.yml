@@ -47,9 +47,31 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    mercure:
+        image: dunglas/mercure
+        restart: unless-stopped
+        environment:
+            # Uncomment the following line to disable HTTPS
+            SERVER_NAME: ':80'
+            MERCURE_PUBLISHER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+            MERCURE_SUBSCRIBER_JWT_KEY: '!ChangeThisMercureHubJWTSecretKey!'
+            MERCURE_EXTRA_DIRECTIVES: |
+                cors_origins http://localhost
+                ui
+                subscriptions
+        # Uncomment the following line to enable the development mode
+        #command: /usr/bin/caddy run --config /etc/caddy/Caddyfile.dev
+        ports:
+            - '8888:80'
+            - '4433:443'
+        volumes:
+            - mercure_data:/data
+            - mercure_config:/config
 networks:
     sail:
         driver: bridge
 volumes:
+    mercure_data:
+    mercure_config:
     sail-mysql:
         driver: local

@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        app('livewire')->useScriptTagAttributes([
+            'data-mercure-url' => config('broadcasting.connections.mercure.url'),
+        ]);
     }
 }
