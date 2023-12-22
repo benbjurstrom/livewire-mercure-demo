@@ -28,7 +28,7 @@
                     </svg>
                 </div>
                 <h3 class="mt-2 text-sm font-semibold text-gray-900">To create messages run:</h3>
-                <pre class="mt-1  inline font-mono text-xs">php artisan message:send</pre>
+                <pre class="mt-1  inline font-mono text-xs">sail artisan message:send</pre>
             </div>
     @endif
 </div>
